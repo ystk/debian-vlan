@@ -10,7 +10,7 @@ XS-Vcs-Browser: http://git.debian.org/?p=collab-maint/vlan.git
 
 Package: vlan
 Architecture: any
-Depends: ${misc:Depends}, ${shlibs:Depends}, iproute
+Depends: ${misc:Depends}, ${shlibs:Depends}, iproute2
 Section: misc
 Description: user mode programs to enable VLANs on your ethernet devices
  This package contains the user mode programs you need to add and remove

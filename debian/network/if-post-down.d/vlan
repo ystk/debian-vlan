@@ -10,9 +10,15 @@ case "$IFACE" in
     exit 0
   ;;
   eth*.0*|bond*.0*|wlan*.0*)
+    # Silently ignore interfaces which ifupdown handles on its own
+    # If IF_BRIDGE_PORTS is set, probably we're called by bridge-utils
+    [ -z "$IF_VLAN_RAW_DEVICE" -a -z "$IF_BRIDGE_PORTS" ] && exit 0
     IF_VLAN_RAW_DEVICE=`echo $IFACE|sed "s/\(eth[0-9][0-9]*\)\..*/\1/;s/\(bond[0-9][0-9]*\)\..*/\1/;s/\(wlan[0-9][0-9]*\)\..*/\1/"`
   ;;
   eth*.*|bond*.*|wlan*.*)
+    # Silently ignore interfaces which ifupdown handles on its own
+    # If IF_BRIDGE_PORTS is set, probably we're called by bridge-utils
+    [ -z "$IF_VLAN_RAW_DEVICE" -a -z "$IF_BRIDGE_PORTS" ] && exit 0
     IF_VLAN_RAW_DEVICE=`echo $IFACE|sed "s/\(eth[0-9][0-9]*\)\..*/\1/;s/\(bond[0-9][0-9]*\)\..*/\1/;s/\(wlan[0-9][0-9]*\)\..*/\1/"`
   ;;
   # Test for vlan raw device (#196890, #292648)
